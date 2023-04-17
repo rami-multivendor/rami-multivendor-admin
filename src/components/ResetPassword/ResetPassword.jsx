@@ -92,8 +92,8 @@ function ResetPassword(props) {
                 passError === false
                   ? globalClasses.inputError
                   : passError === true
-                    ? globalClasses.inputSuccess
-                    : ''
+                  ? globalClasses.inputSuccess
+                  : ''
               ]}
             />
           </Box>
@@ -114,8 +114,8 @@ function ResetPassword(props) {
                 confirmPassError === false
                   ? globalClasses.inputError
                   : confirmPassError === true
-                    ? globalClasses.inputSuccess
-                    : ''
+                  ? globalClasses.inputSuccess
+                  : ''
               ]}
             />
           </Box>

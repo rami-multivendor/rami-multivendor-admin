@@ -58,8 +58,8 @@ function Currency(props) {
                 deliveryRateError === false
                   ? globalClasses.inputError
                   : deliveryRateError === true
-                    ? globalClasses.inputSuccess
-                    : ''
+                  ? globalClasses.inputSuccess
+                  : ''
               ]}
             />
           </Box>
