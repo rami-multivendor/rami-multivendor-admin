@@ -12,7 +12,7 @@ import { isFirebaseSupported, initialize } from './firebase.js'
 import { uploadToken } from './apollo'
 import { gql, useApolloClient } from '@apollo/client'
 import { VAPID_KEY } from './config/constants.js'
-import TawkMessengerReact from "@tawk.to/tawk-messenger-react"
+//import TawkMessengerReact from "@tawk.to/tawk-messenger-react"
 
 require('./i18n')
 
@@ -88,13 +88,13 @@ const App = () => {
     : '/auth/login'
   return (
     <Sentry.ErrorBoundary>
-      <TawkMessengerReact
+      {/* <TawkMessengerReact
           propertyId="5d0f4f6b36eab9721118c84e"
           widgetId="1g01mqhlk"
           customStyle={{
             color: "red",
           }}
-        />
+        /> */}
       <HashRouter basename="/">
         <Switch>
           <AdminPrivateRoute
