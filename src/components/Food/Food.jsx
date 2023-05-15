@@ -57,7 +57,7 @@ function Food(props) {
   const onError = error => {
     mainErrorSetter(`Failed. Please try again. ${error}`)
     successSetter('')
-    setInterval(onDismiss, 400)
+    setInterval(onDismiss, 4000)
   }
   const onCompleted = data => {
     if (!props.food) clearFields()
@@ -126,6 +126,7 @@ function Food(props) {
     return images.length ? images[0] : undefined
   }
   const selectImage = (event, state) => {
+    console.log(state);
     const result = filterImage(event)
     if (result) imageToBase64(result)
   }
