@@ -29,6 +29,7 @@ const CreateRestaurant = props => {
   const [errors, setErrors] = useState('')
   const [success, setSuccess] = useState('')
   const onCompleted = data => {
+    console.log("on complete here");
     setNameError(null)
     setAddressError(null)
     setUsernameError(null)
@@ -53,7 +54,7 @@ const CreateRestaurant = props => {
     setSalesTaxError(null)
     setSuccess('')
     if (graphQLErrors) {
-      setErrors('Server error')
+      setErrors(graphQLErrors[0].message)
     }
     if (networkError) {
       setErrors('Network error')

@@ -199,7 +199,7 @@ const Zone = props => {
               center={center}
               onClick={onClick}>
               <Polygon
-                // Make the Polygon editable / draggable
+                // Make the Polygon editable 
                 editable
                 draggable
                 path={path}
