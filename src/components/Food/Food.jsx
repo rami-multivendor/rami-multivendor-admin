@@ -53,6 +53,7 @@ function Food(props) {
   const [categoryError, categoryErrorSetter] = useState(null)
   const [addonModal, addonModalSetter] = useState(false)
   const restaurantId = localStorage.getItem('restaurantId')
+  
 
   const onError = error => {
     mainErrorSetter(`Failed. Please try again. ${error}`)
@@ -66,7 +67,7 @@ function Food(props) {
       : 'Food added successfully'
     mainErrorSetter('')
     successSetter(message)
-    setInterval(onDismiss, 400)
+    setInterval(onDismiss, 4000)
   }
   const [mutate, { loading: mutateLoading }] = useMutation(mutation, {
     onError,
@@ -126,7 +127,6 @@ function Food(props) {
     return images.length ? images[0] : undefined
   }
   const selectImage = (event, state) => {
-    console.log(state);
     const result = filterImage(event)
     if (result) imageToBase64(result)
   }
@@ -281,9 +281,14 @@ function Food(props) {
     fileReader.readAsDataURL(imgUrl)
   }
   const uploadImageToCloudinary = async () => {
-    if (imgMenu === '') return imgMenu
-    if (props.food && props.food.image === imgMenu) return imgMenu
-
+    if (imgMenu === '') 
+    { 
+    return imgMenu
+    }
+    if (props.food && props.food.image === imgMenu) 
+    {
+    return imgMenu
+    }
     const apiUrl = CLOUDINARY_UPLOAD_URL
     const data = {
       file: imgMenu,
@@ -300,7 +305,6 @@ function Food(props) {
       const imageData = await result.json()
       return imageData.secure_url
     } catch (e) {
-      console.log(e)
     }
   }
   const { t } = props

@@ -19,7 +19,7 @@ import {
   Modal,
   Paper,
   Typography,
-  ListItemIcon
+  ListItemIcon,
 } from '@mui/material'
 import { customStyles } from '../utils/tableCustomStyles'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
@@ -223,7 +223,17 @@ const Food = props => {
       <Header />
       {/* Page content */}
       <Container className={globalClasses.flex} fluid>
-        <FoodComponent />
+        {editModal ? (<Modal
+          open={editModal}
+          onClose={() => {
+            toggleModal()
+          }}
+          style={{
+            overflowY: 'auto'
+          }}>
+          <FoodComponent food={food} />
+        </Modal>) : <FoodComponent />}
+        
         {errorQuery && <span>`Error! ${errorQuery.message}`</span>}
         {loadingQuery ? (
           <CustomLoader />
@@ -251,7 +261,9 @@ const Food = props => {
             paginationIconFirstPage=""
           />
         )}
-        <Modal
+        
+      </Container>
+      {/* <Modal
           open={editModal}
           onClose={() => {
             toggleModal()
@@ -261,8 +273,7 @@ const Food = props => {
             overflowY: 'auto'
           }}>
           <FoodComponent food={food} />
-        </Modal>
-      </Container>
+        </Modal> */}
     </>
   )
 }
