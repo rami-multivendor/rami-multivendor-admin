@@ -10,7 +10,7 @@ import {
 import useGlobalStyles from '../utils/globalStyles'
 import useStyles from '../components/styles'
 import CustomLoader from '../components/Loader/CustomLoader'
-import { Container, Box, Button, Typography } from '@mui/material'
+import { Container, Box, Button, Typography, Alert } from '@mui/material'
 const UPDATE_DELIVERY_BOUNDS_AND_LOCATION = gql`
   ${updateDeliveryBoundsAndLocation}
 `
@@ -23,6 +23,7 @@ export default function DeliveryBoundsAndLocation() {
 
   const [drawBoundsOrMarker, setDrawBoundsOrMarker] = useState('marker') // polygon
   const [errorMessage, setErrorMessage] = useState(null)
+  const [success, setSuccess] = useState('')
   const [center, setCenter] = useState({ lat: 33.684422, lng: 73.047882 })
   const [marker, setMarker] = useState({ lat: 33.684422, lng: 73.047882 })
   const [path, setPath] = useState([
@@ -100,7 +101,10 @@ export default function DeliveryBoundsAndLocation() {
       setPath([...path, { lat: e.latLng.lat(), lng: e.latLng.lng() }])
     }
   }
-
+  const hideAlert = () => {
+    
+    setSuccess('')
+  }
   const removePolygon = () => {
     setPath([])
   }
@@ -128,6 +132,9 @@ export default function DeliveryBoundsAndLocation() {
     })
   }
   function onCompleted({ restaurant }) {
+    console.log("on complete here");
+    setSuccess('Location Added')
+    setTimeout(hideAlert, 5000)
     if (restaurant) {
       setCenter({
         lat: +restaurant.location.coordinates[1],
@@ -143,6 +150,7 @@ export default function DeliveryBoundsAndLocation() {
           : path
       )
     }
+         
   }
   function onError({ networkError, graphqlErrors }) {}
 
@@ -269,11 +277,22 @@ export default function DeliveryBoundsAndLocation() {
                   }
                   const bounds = transformPath(path)
                   mutate({ variables: { id: restaurantId, location, bounds } })
+                  
                 }
               }}>
               Save
             </Button>
           </Box>
+          {success && (
+            <Alert
+              className={globalClasses.alertSuccess}
+              variant="filled"
+              severity="success">
+              {success}
+            </Alert>
+          )}
+      
+          
           <p>{error ? error.message : ''}</p>
           <p>{errorMessage !== null ? errorMessage : ''}</p>
         </Box>
