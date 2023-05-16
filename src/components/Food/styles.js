@@ -18,6 +18,12 @@ const useStyles = makeStyles(theme => ({
     width: '75%',
     alignSelf: 'center'
   },
+  widthModal: {
+    marginLeft: '13%',
+    marginRight: 'auto',
+    width: '75%',
+    alignSelf: 'center'
+  },
   innerContainer: {
     padding: 12,
     backgroundColor: theme.palette.common.white,

@@ -311,7 +311,7 @@ function Food(props) {
   const classes = useStyles()
   const globalClasses = useGlobalStyles()
   return (
-    <Box container className={[classes.container, classes.width60]}>
+    <Box container className={[classes.container, props.food ? classes.widthModal : classes.width60]}>
       <Box className={classes.flexRow}>
         <Box
           item
