@@ -11,7 +11,6 @@ import {
   AppBar,
   Box,
   Toolbar,
-  Divider
 } from '@mui/material'
 
 function AdminNavbar(props) {
@@ -37,7 +36,7 @@ function AdminNavbar(props) {
   return (
     <Box
       sx={{
-        display: { xs: 'none', sm: 'block' },
+        display: {  sm: 'block' },
         flexGrow: 1,
         boxShadow: 0
       }}>
@@ -60,7 +59,7 @@ function AdminNavbar(props) {
                 paddingRight: '10px',
                 borderRadius: '40px',
                 height: 40,
-                width: 90
+                width: 90,
               }}>
               <IconButton
                 size="large"
@@ -88,6 +87,7 @@ function AdminNavbar(props) {
               </Typography>
             </Box>
             <Menu
+              style={{marginTop: 40}}
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -101,10 +101,6 @@ function AdminNavbar(props) {
               }}
               open={Boolean(anchorEl)}
               onClose={handleClose}>
-              <MenuItem sx={{ color: '#000' }} onCLick={handleClose}>
-                Welcome
-              </MenuItem>
-              <Divider />
               {vendor ? (
                 <MenuItem
                   sx={{ color: '#000' }}
@@ -116,7 +112,7 @@ function AdminNavbar(props) {
                 </MenuItem>
               ) : null}
               <MenuItem
-                sx={{ color: '#000' }}
+                sx={{ color: '#000'}}
                 onClick={e => {
                   e.preventDefault()
                   localStorage.removeItem('user-enatega')
