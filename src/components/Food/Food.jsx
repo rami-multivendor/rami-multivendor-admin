@@ -45,7 +45,7 @@ function Food(props) {
   const [category, setCategory] = useState(
     props.food ? props.food.categoryId : ''
   )
-  const [imgMenu, imgMenuSetter] = useState(props.food ? props.food.image : '')
+  const [imgMenu, imgMenuSetter] = useState(props.food ? props.food.image : require('../../assets/img/place.png'))
   const [variationIndex, variationIndexSetter] = useState(0)
   const [mainError, mainErrorSetter] = useState('')
   const [success, successSetter] = useState('')
@@ -211,7 +211,9 @@ function Food(props) {
     return titleError && categoryError && variationsError
   }
   const clearFields = () => {
-    // formRef.current.reset()
+    setTitle('')
+    setDescription('')
+    setCategory('')
     variationSetter([
       {
         title: '',
@@ -222,7 +224,6 @@ function Food(props) {
         priceError: null
       }
     ])
-    imgMenuSetter('')
     titleErrorSetter(null)
     categoryErrorSetter(null)
   }
@@ -401,10 +402,7 @@ function Food(props) {
               <img
                 className={classes.image}
                 alt="..."
-                src={
-                  imgMenu ||
-                  'https://www.lifcobooks.com/wp-content/themes/shopchild/images/placeholder_book.png'
-                }
+                src={imgMenu}
               />
               <label htmlFor="file-upload" className={classes.fileUpload}>
                 Upload an image
