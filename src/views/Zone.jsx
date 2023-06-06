@@ -41,7 +41,7 @@ const Zones = props => {
   const [isOpen, setIsOpen] = useState(false)
   const onChangeSearch = e => setSearchQuery(e.target.value)
 
-  const [/*mutate*/, { error, loading }] = useMutation(DELETE_ZONE, {
+  const [ /*mutate*/ { error, loading }] = useMutation(DELETE_ZONE, {
     refetchQueries: [{ query: GET_ZONES }]
   })
   const { data, loading: loadingQuery, refetch } = useQuery(GET_ZONES)
@@ -49,16 +49,7 @@ const Zones = props => {
     setEditModal(!editModal)
     setZone(zone)
   }
-  // const styles = {
-  //   alert: {
-  //     pointerEvents: 'none',
-  //     position: 'fixed',
-  //     bottom: 0,
-  //     left: 0,
-  //     width: '100%',
-  //     zIndex: 1500,
-  //   },
-  // };
+
   useEffect(() => {
     localStorage.removeItem('restaurant_id')
   }, [])
@@ -122,6 +113,7 @@ const Zones = props => {
               <MenuItem
                 onClick={e => {
                   e.preventDefault()
+                  //uncomment this for paid version
                   //toggleModal(row)
                   setIsOpen(true)
                   setTimeout(() => {
@@ -137,6 +129,7 @@ const Zones = props => {
               <MenuItem
                 onClick={e => {
                   e.preventDefault()
+                  //uncomment this for paid version
                   //mutate({ variables: { id: row._id } })
                   setIsOpen(true)
                   setTimeout(() => {
