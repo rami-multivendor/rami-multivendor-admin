@@ -57,7 +57,7 @@ function Food(props) {
   const onError = error => {
     mainErrorSetter(`Failed. Please try again. ${error}`)
     successSetter('')
-    setInterval(onDismiss, 4000)
+    setInterval(onDismiss, 400)
   }
   const onCompleted = data => {
     if (!props.food) clearFields()
@@ -94,25 +94,25 @@ function Food(props) {
   const [variation, variationSetter] = useState(
     props.food
       ? props.food.variations.map(({ title, price, discounted, addons }) => {
-          return {
-            title,
-            price,
-            discounted,
-            addons,
-            titleError: null,
-            priceError: null
-          }
-        })
+        return {
+          title,
+          price,
+          discounted,
+          addons,
+          titleError: null,
+          priceError: null
+        }
+      })
       : [
-          {
-            title: '',
-            price: '',
-            discounted: '',
-            addons: [],
-            titleError: null,
-            priceError: null
-          }
-        ]
+        {
+          title: '',
+          price: '',
+          discounted: '',
+          addons: [],
+          titleError: null,
+          priceError: null
+        }
+      ]
   )
   const onBlur = (setter, field, state) => {
     setter(!validateFunc({ [field]: state }, field))
@@ -126,7 +126,6 @@ function Food(props) {
     return images.length ? images[0] : undefined
   }
   const selectImage = (event, state) => {
-    console.log(state);
     const result = filterImage(event)
     if (result) imageToBase64(result)
   }
@@ -197,8 +196,8 @@ function Food(props) {
       variationItem.titleError = error
         ? !error
         : variations.length > 1
-        ? !validateFunc({ title: variationItem.title }, 'title')
-        : true
+          ? !validateFunc({ title: variationItem.title }, 'title')
+          : true
 
       return variationItem
     })
@@ -320,7 +319,11 @@ function Food(props) {
       <Box className={classes.form}>
         <form ref={formRef}>
           <Box>
+            <Typography className={classes.labelText}>
+              Title
+            </Typography>
             <Input
+              style={{ marginTop: -1 }}
               id="input-title"
               name="input-title"
               placeholder="Title"
@@ -336,11 +339,15 @@ function Food(props) {
                 titleError === false
                   ? globalClasses.inputError
                   : titleError === true
-                  ? globalClasses.inputSuccess
-                  : ''
+                    ? globalClasses.inputSuccess
+                    : ''
               ]}
             />
+            <Typography className={classes.labelText}>
+              Description
+            </Typography>
             <Input
+              style={{ marginTop: -1 }}
               id="input-description"
               name="input-description"
               placeholder="Description"
@@ -371,8 +378,8 @@ function Food(props) {
                   categoryError === false
                     ? globalClasses.inputError
                     : categoryError === true
-                    ? globalClasses.inputSuccess
-                    : ''
+                      ? globalClasses.inputSuccess
+                      : ''
                 ]}>
                 {!category && (
                   <MenuItem value="" style={{ color: 'black' }}>
@@ -427,83 +434,86 @@ function Food(props) {
                 {variation.map((variationItem, index) => (
                   <Box key={variationItem._id} pl={1} pr={1}>
                     <Box className={globalClasses.flexRow}>
-                      <Box mt={2} sx={{ width: '100%' }}>
-                        <Input
-                          id="input-type"
-                          placeholder="Title"
-                          type="text"
-                          value={variationItem.title}
-                          onChange={event => {
-                            handleVariationChange(
-                              event,
-                              index,
-                              'title',
-                              'variations'
-                            )
-                          }}
-                          onBlur={event => {
-                            onBlurVariation(index, 'title')
-                          }}
-                          disableUnderline
-                          className={[
-                            globalClasses.input,
-                            variationItem.titleError === false
-                              ? globalClasses.inputError
-                              : variationItem.titleError === true
-                              ? globalClasses.inputSuccess
-                              : ''
-                          ]}
-                        />
-                        <Typography sx={{ fontSize: 10, fontWeight: 'bold' }}>
-                          Title must be unique
-                        </Typography>
-                      </Box>
-                      <Input
-                        value={variationItem.price}
-                        id="input-price"
-                        placeholder="Price"
-                        type="number"
-                        onChange={event => {
-                          handleVariationChange(
-                            event,
-                            index,
-                            'price',
-                            'variations'
-                          )
-                        }}
-                        onBlur={event => {
-                          onBlurVariation(index, 'price')
-                        }}
-                        disableUnderline
-                        className={[
-                          globalClasses.input,
-                          variationItem.priceError === false
-                            ? globalClasses.inputError
-                            : variationItem.priceError === true
-                            ? globalClasses.inputSuccess
-                            : ''
-                        ]}
-                      />
-                      <Input
-                        value={variationItem.discounted}
-                        id="input-discounted"
-                        placeholder="Discounted"
-                        type="number"
-                        onChange={event => {
-                          handleVariationChange(
-                            event,
-                            index,
-                            'discounted',
-                            'variations'
-                          )
-                        }}
-                        onBlur={event => {
-                          onBlurVariation(index, 'discounted')
-                        }}
-                        disableUnderline
-                        className={[globalClasses.input]}
-                      />
+                      <Grid container>
+                        <Grid item xs={12} sm={6}>
+                          <Box mt={2}>
+                            <Typography className={classes.labelText}>
+                              Title (must be unique)
+                            </Typography>
+                            <Input
+                              style={{ marginTop: -1 }}
+                              id="input-type"
+                              placeholder="Title"
+                              type="text"
+                              value={variationItem.title}
+                              onChange={event => {
+                                handleVariationChange(event, index, 'title', 'variations');
+                              }}
+                              onBlur={event => {
+                                onBlurVariation(index, 'title');
+                              }}
+                              disableUnderline
+                              className={[
+                                globalClasses.input,
+                                variationItem.titleError === false
+                                  ? globalClasses.inputError
+                                  : variationItem.titleError === true
+                                    ? globalClasses.inputSuccess
+                                    : '',
+                              ]}
+                            />
+                          </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <Box mt={2}>
+                            <Typography className={classes.labelText}>Price</Typography>
+                            <Input
+                              style={{ marginTop: -1 }}
+                              value={variationItem.price}
+                              id="input-price"
+                              placeholder="Price"
+                              type="number"
+                              onChange={event => {
+                                handleVariationChange(event, index, 'price', 'variations');
+                              }}
+                              onBlur={event => {
+                                onBlurVariation(index, 'price');
+                              }}
+                              disableUnderline
+                              className={[
+                                globalClasses.input,
+                                variationItem.priceError === false
+                                  ? globalClasses.inputError
+                                  : variationItem.priceError === true
+                                    ? globalClasses.inputSuccess
+                                    : '',
+                              ]}
+                            />
+                          </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <Box mt={2}>
+                            <Typography className={classes.labelText}>Discounted</Typography>
+                            <Input
+                              style={{ marginTop: -1 }}
+                              value={variationItem.discounted}
+                              id="input-discounted"
+                              placeholder="Discounted"
+                              type="number"
+                              onChange={event => {
+                                handleVariationChange(event, index, 'discounted', 'variations');
+                              }}
+                              onBlur={event => {
+                                onBlurVariation(index, 'discounted');
+                              }}
+                              disableUnderline
+                              className={[globalClasses.input]}
+                            />
+                          </Box>
+                        </Grid>
+                      </Grid>
                     </Box>
+
 
                     <Box>
                       <RemoveIcon

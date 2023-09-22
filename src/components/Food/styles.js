@@ -50,6 +50,13 @@ const useStyles = makeStyles(theme => ({
     margin: 25,
     alignItems: 'center'
   },
+  labelText: {
+    textAlign: 'left',
+    marginLeft: '4%',
+    fontSize: '15px',
+    fontWeight: '500',
+    marginTop: '10px'
+  },
   fileUpload: {
     marginTop: 10,
     backgroundColor: theme.palette.primary.main2,

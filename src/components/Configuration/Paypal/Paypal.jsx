@@ -58,8 +58,10 @@ function Paypal(props) {
 
       <Box className={classes.form}>
         <form ref={formRef}>
-          <Box className={globalClasses.flexRow}>
+          <Box>
+            <Typography className={classes.labelText}>Client ID</Typography>
             <Input
+              style={{ marginTop: -1 }}
               id="input-clientid"
               name="input-clientid"
               placeholder="ClientId e.g AeGIgSX--JEVwoQgLjGOb8gh1DUJG0MFVgLc2mBIe6_V5NefV0LM3L78m01fLLI6U2FFB-qJr4ErrtL1"
@@ -74,13 +76,15 @@ function Paypal(props) {
                 clientIdError === false
                   ? globalClasses.inputError
                   : clientIdError === true
-                  ? globalClasses.inputSuccess
-                  : ''
+                    ? globalClasses.inputSuccess
+                    : ''
               ]}
             />
           </Box>
-          <Box className={globalClasses.flexRow}>
+          <Box>
+            <Typography className={classes.labelText}>Client Secret Key</Typography>
             <Input
+              style={{ marginTop: -1 }}
               id="input-clientsecret"
               name="input-clientsecret"
               placeholder="e.g EHAP6CSZt3kwzcpdxrpw16PqHEspw5wtJCVVux_95e2Qcwbeh6mQp9GncEbxnVFkEbJu4z1i-GuDDthf"
@@ -99,8 +103,8 @@ function Paypal(props) {
                 clientSecretError === false
                   ? globalClasses.inputError
                   : clientSecretError === true
-                  ? globalClasses.inputSuccess
-                  : ''
+                    ? globalClasses.inputSuccess
+                    : ''
               ]}
             />
           </Box>

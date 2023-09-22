@@ -39,6 +39,13 @@ const useStyles = makeStyles(theme => ({
     margin: 25,
     alignItems: 'center'
   },
+  labelText: {
+    textAlign: 'left',
+    marginLeft: '4%',
+    fontSize: '15px',
+    fontWeight: '500',
+    marginTop: '10px'
+  },
   section: {
     textAlign: 'left',
     height: '300px',

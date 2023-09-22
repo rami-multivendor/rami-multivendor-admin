@@ -71,64 +71,76 @@ const Notifications = props => {
                   <CustomLoader />
                 ) : (
                   <form>
-                    <Box className={globalClasses.flexRow}>
-                      <Input
-                        id="input-title"
-                        placeholder="Title"
-                        type="text"
-                        value={notificationTitle}
-                        onChange={event => {
-                          setNotificationTitle(event.target.value)
-                        }}
-                        disableUnderline
-                        className={[
-                          globalClasses.input,
-                          titleError === false
-                            ? globalClasses.inputError
-                            : titleError === true
-                            ? globalClasses.inputSuccess
-                            : ''
-                        ]}
-                      />
-                      <Input
-                        id="input-title"
-                        placeholder="Body"
-                        type="text"
-                        value={notificationBody}
-                        onChange={event => {
-                          setNotificationBody(event.target.value)
-                        }}
-                        disableUnderline
-                        className={[
-                          globalClasses.input,
-                          bodyError === false
-                            ? globalClasses.inputError
-                            : bodyError === true
-                            ? globalClasses.inputSuccess
-                            : ''
-                        ]}
-                      />
-                    </Box>
-                    <Box>
-                      <Button
-                        className={globalClasses.button}
-                        disabled={loading}
-                        onClick={async e => {
-                          e.preventDefault()
-                          if (onSubmitValidaiton()) {
-                            mutate({
-                              variables: {
-                                notificationBody: notificationBody,
-                                notificationTitle: notificationTitle
-                              }
-                            })
-                          }
-                          setSuccess('')
-                          setError('')
-                        }}>
-                        SAVE
-                      </Button>
-                    </Box>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                          <Box>
+                            <Typography className={classes.labelText}>Title</Typography>
+                            <Input
+                              style={{ marginTop: -1 }}
+                              id="input-title"
+                              placeholder="Title"
+                              type="text"
+                              value={notificationTitle}
+                              onChange={event => {
+                                setNotificationTitle(event.target.value)
+                              }}
+                              disableUnderline
+                              className={[
+                                globalClasses.input,
+                                titleError === false
+                                  ? globalClasses.inputError
+                                  : titleError === true
+                                    ? globalClasses.inputSuccess
+                                    : ''
+                              ]}
+                            />
+                          </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <Box>
+                            <Typography className={classes.labelText}>Body</Typography>
+                            <Input
+                              style={{ marginTop: -1 }}
+                              id="input-body"
+                              placeholder="Body"
+                              type="text"
+                              value={notificationBody}
+                              onChange={event => {
+                                setNotificationBody(event.target.value)
+                              }}
+                              disableUnderline
+                              className={[
+                                globalClasses.input,
+                                bodyError === false
+                                  ? globalClasses.inputError
+                                  : bodyError === true
+                                    ? globalClasses.inputSuccess
+                                    : ''
+                              ]}
+                            />
+                          </Box>
+                        </Grid>
+                      </Grid>
+                      <Box>
+                        <Button
+                          className={globalClasses.button}
+                          disabled={loading}
+                          onClick={async e => {
+                            e.preventDefault()
+                            if (onSubmitValidaiton()) {
+                              mutate({
+                                variables: {
+                                  notificationBody: notificationBody,
+                                  notificationTitle: notificationTitle
+                                }
+                              })
+                            }
+                            setSuccess('')
+                            setError('')
+                          }}>
+                          SAVE
+                        </Button>
+                      </Box>
                   </form>
                 )}
                 <Box mt={2}>

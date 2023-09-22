@@ -58,9 +58,9 @@ const Vendors = props => {
     searchQuery.length < 3
       ? data && data.vendors
       : data &&
-        data.vendors.filter(vendor => {
-          return vendor.email.toLowerCase().search(regex) > -1
-        })
+      data.vendors.filter(vendor => {
+        return vendor.email.toLowerCase().search(regex) > -1
+      })
 
   const toggleModal = vendor => {
     setEditModal(!editModal)
@@ -159,8 +159,6 @@ const Vendors = props => {
                   setTimeout(() => {
                     setIsOpen(false)
                   }, 5000)
-                  //uncomment this for paid version
-                  //toggleModal(row)
                 }}
                 style={{ height: 25 }}>
                 <ListItemIcon>
@@ -175,8 +173,6 @@ const Vendors = props => {
                   setTimeout(() => {
                     setIsOpen(false)
                   }, 5000)
-                  //uncomment this for paid version
-                 // mutate({ variables: { id: row._id } })
                 }}
                 style={{ height: 25 }}>
                 <ListItemIcon>
@@ -195,17 +191,19 @@ const Vendors = props => {
     <>
       <Header />
       {isOpen && (
-            <Alert
-              message="This feature will available after purchasing product"
-              severity="warning"
-              />
-          )}
-      {/* Page content */}
+        <Alert
+          message="This feature will available after purchasing product"
+          severity="warning"
+        />
+      )}
+
       <Container className={golbalClasses.flex}>
         <Grid container>
-          <Grid item order={{ xs: 2, lg: 1 }}>
+          {/* <Grid item order={{ xs: 2, lg: 1 }}> */}
+          <Grid item xs={12} lg={6}>
             <VendorComponent />
           </Grid>
+
           <Grid
             sx={{ display: { xs: 'none', lg: 'block' } }}
             item

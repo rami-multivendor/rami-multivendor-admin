@@ -4,7 +4,7 @@ import { validateFunc } from '../../constraints/constraints'
 import { withTranslation } from 'react-i18next'
 import useStyles from './styles'
 import useGlobalStyles from '../../utils/globalStyles'
-import { Box, Typography, Input, Button, Alert } from '@mui/material'
+import { Box, Typography, Input, Button, Alert, Grid } from '@mui/material'
 import { editTipping, getTipping, createTipping } from '../../apollo'
 
 const GET_TIPPING = gql`
@@ -89,70 +89,89 @@ function Tipping(props) {
 
       <Box className={classes.form}>
         <form ref={formRef}>
-          <Box className={globalClasses.flexRow}>
-            <Input
-              name="tip1"
-              id="input-type-tip1"
-              placeholder="Tip1 e.g 10"
-              type="number"
-              defaultValue={
-                data && data.tips.tipVariations
-                  ? data.tips.tipVariations[0]
-                  : ''
-              }
-              disableUnderline
-              className={[
-                globalClasses.input,
-                tip1Error === false
-                  ? globalClasses.inputError
-                  : tip1Error === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-            <Input
-              name="tip2"
-              id="input-type-tip2"
-              placeholder="Tip2 e.g 12"
-              type="number"
-              defaultValue={
-                data && data.tips.tipVariations
-                  ? data.tips.tipVariations[1]
-                  : ''
-              }
-              disableUnderline
-              className={[
-                globalClasses.input,
-                tip2Error === false
-                  ? globalClasses.inputError
-                  : tip2Error === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-          </Box>
-          <Box className={globalClasses.flexRow}>
-            <Input
-              name="tip3"
-              id="input-type-tip3"
-              placeholder="Tip3 e.g 15"
-              type="number"
-              defaultValue={
-                data && data.tips.tipVariations
-                  ? data.tips.tipVariations[2]
-                  : ''
-              }
-              disableUnderline
-              className={[
-                globalClasses.input,
-                tip3Error === false
-                  ? globalClasses.inputError
-                  : tip3Error === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-          </Box>
+          <Grid container spacing={0}>
+            <Grid item xs={12} sm={6}>
+              <Box>
+                <Typography className={classes.labelText}>Tip 1</Typography>
+                <Input
+                  style={{ marginTop: -1 }}
+                  name="tip1"
+                  id="input-type-tip1"
+                  placeholder="Tip1 e.g 10"
+                  type="number"
+                  defaultValue={
+                    data && data.tips.tipVariations
+                      ? data.tips.tipVariations[0]
+                      : ''
+                  }
+                  disableUnderline
+                  className={[
+                    globalClasses.input,
+                    tip1Error === false
+                      ? globalClasses.inputError
+                      : tip1Error === true
+                        ? globalClasses.inputSuccess
+                        : '',
+                  ]}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Box>
+                <Typography className={classes.labelText}>Tip 2</Typography>
+                <Input
+                  style={{ marginTop: -1 }}
+                  name="tip2"
+                  id="input-type-tip2"
+                  placeholder="Tip2 e.g 12"
+                  type="number"
+                  defaultValue={
+                    data && data.tips.tipVariations
+                      ? data.tips.tipVariations[1]
+                      : ''
+                  }
+                  disableUnderline
+                  className={[
+                    globalClasses.input,
+                    tip2Error === false
+                      ? globalClasses.inputError
+                      : tip2Error === true
+                        ? globalClasses.inputSuccess
+                        : '',
+                  ]}
+                />
+              </Box>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={0}>
+            <Grid item xs={12} sm={6}>
+              <Box>
+                <Typography className={classes.labelText}>Tip 3</Typography>
+                <Input
+                  style={{ marginTop: -1 }}
+                  name="tip3"
+                  id="input-type-tip3"
+                  placeholder="Tip3 e.g 15"
+                  type="number"
+                  defaultValue={
+                    data && data.tips.tipVariations
+                      ? data.tips.tipVariations[2]
+                      : ''
+                  }
+                  disableUnderline
+                  className={[
+                    globalClasses.input,
+                    tip3Error === false
+                      ? globalClasses.inputError
+                      : tip3Error === true
+                        ? globalClasses.inputSuccess
+                        : '',
+                  ]}
+                />
+              </Box>
+            </Grid>
+          </Grid>
           <Box>
             <Button
               className={globalClasses.button}

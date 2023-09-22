@@ -38,6 +38,13 @@ const useStyles = makeStyles(theme => ({
   form: {
     margin: 25,
     alignItems: 'center'
+  },
+  labelText: {
+    textAlign: 'left',
+    marginLeft: '4%',
+    fontSize: '15px',
+    fontWeight: '500',
+    marginTop: '10px'
   }
 }))
 

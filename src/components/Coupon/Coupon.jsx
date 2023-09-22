@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next'
 import { editCoupon, createCoupon, getCoupons } from '../../apollo'
 import useStyles from './styles'
 import useGlobalStyles from '../../utils/globalStyles'
-import { Box, Switch, Typography, Input, Button, Alert } from '@mui/material'
+import { Box, Switch, Typography, Input, Button, Alert, Grid } from '@mui/material'
 
 const CREATE_COUPON = gql`
   ${createCoupon}
@@ -104,45 +104,60 @@ function Category(props) {
       <Box className={classes.form}>
         <form ref={formRef}>
           <Box className={globalClasses.flexRow}>
-            <Input
-              id="input-code"
-              name="input-code"
-              placeholder="Code e.g SALE50"
-              type="text"
-              defaultValue={title}
-              onBlur={event =>
-                onBlur(titleErrorSetter, 'title', event.target.value)
-              }
-              disableUnderline
-              className={[
-                globalClasses.input,
-                titleError === false
-                  ? globalClasses.inputError
-                  : titleError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-            <Input
-              id="input-discount"
-              name="input-discount"
-              placeholder="Discount % i.e 1-99"
-              type="number"
-              defaultValue={discount}
-              onBlur={event => {
-                onBlur(discountErrorSetter, 'discount', event.target.value)
-              }}
-              disableUnderline
-              className={[
-                globalClasses.input,
-                discountError === false
-                  ? globalClasses.inputError
-                  : discountError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
+            <Grid container spacing={0}>
+              <Grid item xs={12} sm={6}>
+                <Typography className={classes.labelText}>
+                  Code
+                </Typography>
+                <Input
+                  style={{ marginTop: -1 }}
+                  id="input-code"
+                  name="input-code"
+                  placeholder="Code e.g SALE50"
+                  type="text"
+                  defaultValue={title}
+                  onBlur={event =>
+                    onBlur(titleErrorSetter, 'title', event.target.value)
+                  }
+                  disableUnderline
+                  className={[
+                    globalClasses.input,
+                    titleError === false
+                      ? globalClasses.inputError
+                      : titleError === true
+                        ? globalClasses.inputSuccess
+                        : '',
+                  ]}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Typography className={classes.labelText}>
+                  Discount
+                </Typography>
+                <Input
+                  style={{ marginTop: -1 }}
+                  id="input-discount"
+                  name="input-discount"
+                  placeholder="Discount % i.e 1-99"
+                  type="number"
+                  defaultValue={discount}
+                  onBlur={event => {
+                    onBlur(discountErrorSetter, 'discount', event.target.value);
+                  }}
+                  disableUnderline
+                  className={[
+                    globalClasses.input,
+                    discountError === false
+                      ? globalClasses.inputError
+                      : discountError === true
+                        ? globalClasses.inputSuccess
+                        : '',
+                  ]}
+                />
+              </Grid>
+            </Grid>
           </Box>
+
           {loading ? t('Loading') : null}
           <Box>
             <Button

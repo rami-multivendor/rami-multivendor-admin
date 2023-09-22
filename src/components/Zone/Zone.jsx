@@ -6,7 +6,7 @@ import { withTranslation } from 'react-i18next'
 import { GoogleMap, Polygon } from '@react-google-maps/api'
 import useStyles from './styles'
 import useGlobalStyles from '../../utils/globalStyles'
-import { Box, Typography, Input, Button, Alert } from '@mui/material'
+import { Box, Typography, Input, Button, Alert, Grid } from '@mui/material'
 
 // core components
 import { createZone, editZone, getZones } from '../../apollo'
@@ -150,44 +150,56 @@ const Zone = props => {
 
       <Box className={classes.form}>
         <form>
-          <Box className={globalClasses.flexRow}>
-            <Input
-              id="input-title"
-              placeholder="Title"
-              type="title"
-              value={title}
-              onChange={event => {
-                setTitle(event.target.value)
-              }}
-              disableUnderline
-              className={[
-                globalClasses.input,
-                titleError === false
-                  ? globalClasses.inputError
-                  : titleError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-            <Input
-              id="input-description"
-              placeholder="Description"
-              type="text"
-              value={description}
-              onChange={event => {
-                setDescription(event.target.value)
-              }}
-              disableUnderline
-              className={[
-                globalClasses.input,
-                descriptionError === false
-                  ? globalClasses.inputError
-                  : descriptionError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-          </Box>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <Box>
+                <Typography className={classes.labelText}>Title</Typography>
+                <Input
+                  style={{ marginTop: -1 }}
+                  id="input-title"
+                  placeholder="Title"
+                  type="text"
+                  value={title}
+                  onChange={event => {
+                    setTitle(event.target.value);
+                  }}
+                  disableUnderline
+                  className={[
+                    globalClasses.input,
+                    titleError === false
+                      ? globalClasses.inputError
+                      : titleError === true
+                        ? globalClasses.inputSuccess
+                        : '',
+                  ]}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Box>
+                <Typography className={classes.labelText}>Description</Typography>
+                <Input
+                  style={{ marginTop: -1 }}
+                  id="input-description"
+                  placeholder="Description"
+                  type="text"
+                  value={description}
+                  onChange={event => {
+                    setDescription(event.target.value);
+                  }}
+                  disableUnderline
+                  className={[
+                    globalClasses.input,
+                    descriptionError === false
+                      ? globalClasses.inputError
+                      : descriptionError === true
+                        ? globalClasses.inputSuccess
+                        : '',
+                  ]}
+                />
+              </Box>
+            </Grid>
+          </Grid>
           <Box mt={2} className={globalClasses.flexRow}>
             <GoogleMap
               mapContainerStyle={{
@@ -199,7 +211,7 @@ const Zone = props => {
               center={center}
               onClick={onClick}>
               <Polygon
-                // Make the Polygon editable 
+                // Make the Polygon editable / draggable
                 editable
                 draggable
                 path={path}

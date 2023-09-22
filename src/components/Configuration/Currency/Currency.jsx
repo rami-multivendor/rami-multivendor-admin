@@ -59,8 +59,10 @@ function Currency(props) {
 
       <Box className={classes.form}>
         <form>
-          <Box className={globalClasses.flexRow}>
+          <Box>
+            <Typography className={classes.labelText}>Choose Currency</Typography>
             <Select
+              style={{ marginTop: -1 }}
               id="input-currency"
               name="input-currency"
               defaultValue={[currencyCode || '']}
@@ -73,8 +75,8 @@ function Currency(props) {
                 currencyCodeError === false
                   ? globalClasses.inputError
                   : currencyCodeError === true
-                  ? globalClasses.inputSuccess
-                  : ''
+                    ? globalClasses.inputSuccess
+                    : ''
               ]}>
               {stripeCurrencies.map(val => (
                 <MenuItem
@@ -86,8 +88,10 @@ function Currency(props) {
               ))}
             </Select>
           </Box>
-          <Box className={globalClasses.flexRow}>
+          <Box>
+            <Typography className={classes.labelText}>Choose Symbol</Typography>
             <Select
+              style={{ marginTop: -1 }}
               id="input-symbol"
               name="input-symbol"
               defaultValue={[currencySymbol || '']}
@@ -100,8 +104,8 @@ function Currency(props) {
                 currencySymbolError === false
                   ? globalClasses.inputError
                   : currencySymbolError === true
-                  ? globalClasses.inputSuccess
-                  : ''
+                    ? globalClasses.inputSuccess
+                    : ''
               ]}>
               {stripeCurrencies.map(val => (
                 <MenuItem

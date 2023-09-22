@@ -41,8 +41,10 @@ function Currency(props) {
 
       <Box className={classes.form}>
         <form>
-          <Box className={globalClasses.flexRow}>
+          <Box>
+            <Typography className={classes.labelText}>Delivery Rate</Typography>
             <Input
+              style={{ marginTop: -1 }}
               disabled
               id="input-delivery"
               name="input-delivery"
@@ -58,8 +60,8 @@ function Currency(props) {
                 deliveryRateError === false
                   ? globalClasses.inputError
                   : deliveryRateError === true
-                  ? globalClasses.inputSuccess
-                  : ''
+                    ? globalClasses.inputSuccess
+                    : ''
               ]}
             />
           </Box>

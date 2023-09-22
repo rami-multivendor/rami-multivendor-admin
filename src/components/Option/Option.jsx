@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Typography, Input, Alert, Button } from '@mui/material'
+import { Box, Typography, Input, Alert, Button, Grid } from '@mui/material'
 import { withTranslation } from 'react-i18next'
 import { useMutation, gql } from '@apollo/client'
 import { createOptions, editOption } from '../../apollo'
@@ -22,14 +22,14 @@ function Option(props) {
     props.option
       ? [{ ...props.option, titleError: false, priceError: false }]
       : [
-          {
-            title: '',
-            description: '',
-            price: 0,
-            titleError: false,
-            priceError: false
-          }
-        ]
+        {
+          title: '',
+          description: '',
+          price: 0,
+          titleError: false,
+          priceError: false
+        }
+      ]
   )
   const [mainError, mainErrorSetter] = useState('')
   const [success, successSetter] = useState('')
@@ -137,79 +137,99 @@ function Option(props) {
       <Box className={classes.form}>
         <form>
           {option.map((optionItem, index) => (
-            <Box key={optionItem._id} className={globalClasses.flexRow}>
-              <Input
-                id="input-title"
-                placeholder="Title"
-                type="text"
-                value={optionItem.title}
-                onChange={event => {
-                  onChange(event, index, 'title')
-                }}
-                disableUnderline
-                className={[
-                  globalClasses.input,
-                  optionItem.titleError === true ? globalClasses.inputError : ''
-                ]}
-              />
-              <Input
-                id="input-description"
-                placeholder="Description"
-                type="text"
-                value={optionItem.description}
-                onChange={event => {
-                  onChange(event, index, 'description')
-                }}
-                disableUnderline
-                className={[
-                  globalClasses.input,
-                  optionItem.descriptionError === true
-                    ? globalClasses.inputError
-                    : ''
-                ]}
-              />
-              <Input
-                id="input-price"
-                placeholder="Price"
-                type="number"
-                value={optionItem.price}
-                onChange={event => {
-                  onChange(event, index, 'price')
-                }}
-                disableUnderline
-                className={[
-                  globalClasses.input,
-                  optionItem.priceError === true ? globalClasses.inputError : ''
-                ]}
-              />
-              {!props.option && (
-                <>
-                  <RemoveIcon
-                    style={{
-                      backgroundColor: '#000',
-                      color: '#90EA93',
-                      borderRadius: '50%',
-                      marginTop: 12,
-                      marginRight: 10
+            <Grid container key={optionItem._id}>
+              <Grid item xs={12} sm={3}>
+                <div>
+                  <Typography className={classes.labelText}>Title</Typography>
+                  <Input
+                    style={{ marginTop: -1 }}
+                    id={`input-title-${index}`}
+                    placeholder="Title"
+                    type="text"
+                    value={optionItem.title}
+                    onChange={event => {
+                      onChange(event, index, 'title');
                     }}
-                    onClick={() => {
-                      onRemove(index)
-                    }}
+                    disableUnderline
+                    className={[
+                      globalClasses.input,
+                      optionItem.titleError === true ? globalClasses.inputError : '',
+                    ]}
                   />
-                  <AddIcon
-                    style={{
-                      backgroundColor: '#90EA93',
-                      color: '#000',
-                      borderRadius: '50%',
-                      marginTop: 12
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                <div>
+                  <Typography className={classes.labelText}>Description</Typography>
+                  <Input
+                    style={{ marginTop: -1 }}
+                    id={`input-description-${index}`}
+                    placeholder="Description"
+                    type="text"
+                    value={optionItem.description}
+                    onChange={event => {
+                      onChange(event, index, 'description');
                     }}
-                    onClick={() => {
-                      onAdd(index)
-                    }}
+                    disableUnderline
+                    className={[
+                      globalClasses.input,
+                      optionItem.descriptionError === true
+                        ? globalClasses.inputError
+                        : '',
+                    ]}
                   />
-                </>
-              )}
-            </Box>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                <div>
+                  <Typography className={classes.labelText}>Price</Typography>
+                  <Input
+                    style={{ marginTop: -1 }}
+                    id={`input-price-${index}`}
+                    placeholder="Price"
+                    type="number"
+                    value={optionItem.price}
+                    onChange={event => {
+                      onChange(event, index, 'price');
+                    }}
+                    disableUnderline
+                    className={[
+                      globalClasses.input,
+                      optionItem.priceError === true ? globalClasses.inputError : '',
+                    ]}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={3} container justify="center" alignItems="center">
+                {!props.option && (
+                  <div className={classes.labelText}>
+                    <RemoveIcon
+                      style={{
+                        backgroundColor: '#000',
+                        color: '#90EA93',
+                        borderRadius: '50%',
+                        marginTop: 12,
+                        marginRight: 10,
+                      }}
+                      onClick={() => {
+                        onRemove(index);
+                      }}
+                    />
+                    <AddIcon
+                      style={{
+                        backgroundColor: '#90EA93',
+                        color: '#000',
+                        borderRadius: '50%',
+                        marginTop: 12,
+                      }}
+                      onClick={() => {
+                        onAdd(index);
+                      }}
+                    />
+                  </div>
+                )}
+              </Grid>
+            </Grid>
           ))}
 
           <Box>
@@ -220,32 +240,32 @@ function Option(props) {
                 if (validate()) {
                   props.option
                     ? mutate({
-                        variables: {
-                          optionInput: {
-                            options: {
-                              _id: props.option._id,
-                              title: option[0].title,
-                              description: option[0].description,
-                              price: +option[0].price
-                            },
-                            restaurant: restaurantId
-                          }
+                      variables: {
+                        optionInput: {
+                          options: {
+                            _id: props.option._id,
+                            title: option[0].title,
+                            description: option[0].description,
+                            price: +option[0].price
+                          },
+                          restaurant: restaurantId
                         }
-                      })
+                      }
+                    })
                     : mutate({
-                        variables: {
-                          optionInput: {
-                            options: option.map(
-                              ({ title, description, price }) => ({
-                                title,
-                                description,
-                                price: +price
-                              })
-                            ),
-                            restaurant: restaurantId
-                          }
+                      variables: {
+                        optionInput: {
+                          options: option.map(
+                            ({ title, description, price }) => ({
+                              title,
+                              description,
+                              price: +price
+                            })
+                          ),
+                          restaurant: restaurantId
                         }
-                      })
+                      }
+                    })
                 }
               }}>
               SAVE

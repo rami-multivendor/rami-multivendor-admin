@@ -178,8 +178,12 @@ const Login = props => {
 
             <Box className={classes.form}>
               <form ref={formRef}>
-                <Box className={globalClasses.flexRow}>
+                <Box>
+                  <Typography className={classes.labelText}>
+                    Email
+                  </Typography>
                   <Input
+                    style={{ marginTop: -1 }}
                     id="input-email"
                     name="input-email"
                     value={stateData.email}
@@ -202,9 +206,12 @@ const Login = props => {
                     ]}
                   />
                 </Box>
-                <Box className={globalClasses.flexRow}>
+                <Box>
+                  <Typography className={classes.labelText}>
+                    Password
+                  </Typography>
                   <Input
-            
+                    style={{ marginTop: -1 }}
                     id="input-password"
                     name="input-password"
                     placeholder="Password"

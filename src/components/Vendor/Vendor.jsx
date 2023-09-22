@@ -61,9 +61,9 @@ function Vendor(props) {
     const passwordError = props.vendor
       ? true
       : !validateFunc(
-          { password: formRef.current['input-password'].value },
-          'password'
-        )
+        { password: formRef.current['input-password'].value },
+        'password'
+      )
 
     emailErrorSetter(emailError)
     passErrorSetter(passwordError)
@@ -89,12 +89,19 @@ function Vendor(props) {
           {props.vendor ? t('Edit Vendor') : t('Add Vendor')}
         </Typography>
       </Box>
-      <Box item lg={12} className={[globalClasses.flex, classes.form]}>
+      {/* <Box item lg={12} className={[globalClasses.flex, classes.form]}> */}
+        <Box className={classes.form}>
         <form ref={formRef}>
+          {/* <Box > */}
+          <Typography className={classes.labelText}>
+            Email
+          </Typography>
           <Input
+            style={{ marginTop: -1 }}
             id="input-email"
             name="input-email"
             placeholder="Email"
+            margin="0px"
             type="email"
             disableUnderline
             className={[
@@ -102,33 +109,40 @@ function Vendor(props) {
               emailError === false
                 ? globalClasses.inputError
                 : emailError === true
-                ? globalClasses.inputSuccess
-                : ''
+                  ? globalClasses.inputSuccess
+                  : ''
             ]}
             defaultValue={email}
             onBlur={event =>
               onBlur(emailErrorSetter, 'email', event.target.value)
             }
           />
+          {/* </Box> */}
           {!props.vendor ? (
-            <Input
-              placeholder="Password"
-              disableUnderline
-              className={[
-                globalClasses.input,
-                passError === false
-                  ? globalClasses.inputError
-                  : passError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-              id="input-password"
-              name="input-password"
-              type="text"
-              onBlur={event => {
-                onBlur(passErrorSetter, 'password', event.target.value)
-              }}
-            />
+            <>
+              <Typography className={classes.labelText}>
+                Password
+              </Typography>
+              <Input
+                style={{ marginTop: -1 }}
+                placeholder="Password"
+                disableUnderline
+                className={[
+                  globalClasses.input,
+                  passError === false
+                    ? globalClasses.inputError
+                    : passError === true
+                      ? globalClasses.inputSuccess
+                      : ''
+                ]}
+                id="input-password"
+                name="input-password"
+                type="text"
+                onBlur={event => {
+                  onBlur(passErrorSetter, 'password', event.target.value)
+                }}
+              />
+            </>
           ) : null}
           <Button
             className={globalClasses.button}

@@ -20,7 +20,8 @@ import {
   Alert,
   Select,
   MenuItem,
-  Button
+  Button,
+  Grid
 } from '@mui/material'
 
 const CREATE_RIDER = gql`
@@ -163,168 +164,201 @@ function Rider(props) {
         </Box>
       </Box>
 
-      <Box className={classes.form}>
-        <form ref={formRef}>
-          <Box className={globalClasses.flexRow}>
-            <Input
-              id="input-name"
-              name="input-name"
-              placeholder="Rider name"
-              type="text"
-              defaultValue={name}
-              onBlur={event => {
-                onBlur(nameErrorSetter, 'name', event.target.value)
-              }}
-              disableUnderline
-              className={[
-                globalClasses.input,
-                nameError === false
-                  ? globalClasses.inputError
-                  : nameError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-            <Input
-              id="input-username"
-              name="input-userName"
-              placeholder="Username"
-              type="text"
-              defaultValue={userName}
-              onBlur={event =>
-                onBlur(usernameErrorSetter, 'username', event.target.value)
-              }
-              disableUnderline
-              className={[
-                globalClasses.input,
-                usernameError === false
-                  ? globalClasses.inputError
-                  : usernameError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-          </Box>
-          <Box className={globalClasses.flexRow}>
-            <Input
-              id="input-password"
-              name="input-password"
-              placeholder="Password"
-              type="text"
-              defaultValue={password}
-              onBlur={event =>
-                onBlur(passwordErrorSetter, 'password', event.target.value)
-              }
-              disableUnderline
-              className={[
-                globalClasses.input,
-                passwordError === false
-                  ? globalClasses.inputError
-                  : passwordError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-            <Input
-              ref={formRef}
-              id="input-phone"
-              name="input-phone"
-              placeholder="Phone Number"
-              type="number"
-              defaultValue={phone}
-              onBlur={event =>
-                onBlur(phoneErrorSetter, 'phone', event.target.value)
-              }
-              disableUnderline
-              className={[
-                globalClasses.input,
-                phoneError === false
-                  ? globalClasses.inputError
-                  : phoneError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}
-            />
-          </Box>
-          <Box className={globalClasses.flexRow}>
-            <Select
-              labelId="rider-zone"
-              id="input-zone"
-              name="input-zone"
-              defaultValue={riderZone}
-              displayEmpty
-              inputProps={{ 'aria-label': 'Without label' }}
-              value={riderZone}
-              onChange={e => setRiderZone(e.target.value)}
-              className={[
-                globalClasses.input,
-                zoneError === false
-                  ? globalClasses.inputError
-                  : zoneError === true
-                  ? globalClasses.inputSuccess
-                  : ''
-              ]}>
-              {!zone && (
-                <MenuItem sx={{ color: 'black' }} value={''}>
-                  Rider Zone
-                </MenuItem>
-              )}
-              {data &&
-                data.zones.map(zone => (
-                  <MenuItem
-                    style={{ color: 'black' }}
-                    value={zone._id}
-                    key={zone._id}>
-                    {zone.title}
-                  </MenuItem>
-                ))}
-            </Select>
-          </Box>
-          <Box>
-            <Button
-              className={globalClasses.button}
-              disabled={loading}
-              onClick={async e => {
-                e.preventDefault()
-                if (onSubmitValidaiton()) {
-                  mutate({
-                    variables: {
-                      riderInput: {
-                        _id: props.rider ? props.rider._id : '',
-                        name: formRef.current['input-name'].value,
-                        username: formRef.current['input-userName'].value,
-                        password: formRef.current['input-password'].value,
-                        phone: formRef.current['input-phone'].value,
-                        zone: riderZone,
-                        available: riderAvailable
-                      }
-                    }
-                  })
+      {/* <Box className={classes.form}> */}
+      <form ref={formRef}>
+        <Box className={globalClasses.flexRow}>
+          <Grid container spacing={-4} style={{ maxWidth: '600px' }}>
+            <Grid item xs={12} sm={6} style={{ alignItems: 'center' }}>
+              {/* <Box> */}
+              <Typography className={classes.labelText}>
+                Name
+              </Typography>
+              <Input
+                style={{ marginTop: -1 }}
+                id="input-name"
+                name="input-name"
+                placeholder="Rider name"
+                type="text"
+                defaultValue={name}
+                onBlur={event => {
+                  onBlur(nameErrorSetter, 'name', event.target.value)
+                }}
+                disableUnderline
+                className={[
+                  globalClasses.input,
+                  nameError === false
+                    ? globalClasses.inputError
+                    : nameError === true
+                      ? globalClasses.inputSuccess
+                      : ''
+                ]}
+              />
+              {/* </Box> */}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              {/* <Box> */}
+              <Typography className={classes.labelText}>
+                User Name
+              </Typography>
+              <Input
+                style={{ marginTop: -1 }}
+                id="input-username"
+                name="input-userName"
+                placeholder="Username"
+                type="text"
+                defaultValue={userName}
+                onBlur={event =>
+                  onBlur(usernameErrorSetter, 'username', event.target.value)
                 }
-              }}>
-              SAVE
-            </Button>
-          </Box>
-        </form>
-        <Box mt={2}>
-          {success && (
-            <Alert
-              className={globalClasses.alertSuccess}
-              variant="filled"
-              severity="success">
-              {success}
-            </Alert>
-          )}
-          {mainError && (
-            <Alert
-              className={globalClasses.alertSuccess}
-              variant="filled"
-              severity="error">
-              {mainError}
-            </Alert>
-          )}
+                disableUnderline
+                className={[
+                  globalClasses.input,
+                  usernameError === false
+                    ? globalClasses.inputError
+                    : usernameError === true
+                      ? globalClasses.inputSuccess
+                      : ''
+                ]}
+              />
+              {/* </Box> */}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              {/* <Box> */}
+              <Typography className={classes.labelText}>
+                Password
+              </Typography>
+              <Input
+                style={{ marginTop: -1 }}
+                id="input-password"
+                name="input-password"
+                placeholder="Password"
+                type="text"
+                defaultValue={password}
+                onBlur={event =>
+                  onBlur(passwordErrorSetter, 'password', event.target.value)
+                }
+                disableUnderline
+                className={[
+                  globalClasses.input,
+                  passwordError === false
+                    ? globalClasses.inputError
+                    : passwordError === true
+                      ? globalClasses.inputSuccess
+                      : '',
+                ]}
+              />
+              {/* </Box> */}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              {/* <Box> */}
+              <Typography className={classes.labelText}>
+                Number
+              </Typography>
+              <Input
+                style={{ marginTop: -1 }}
+                ref={formRef}
+                id="input-phone"
+                name="input-phone"
+                placeholder="Phone Number"
+                type="number"
+                defaultValue={phone}
+                onBlur={event =>
+                  onBlur(phoneErrorSetter, 'phone', event.target.value)
+                }
+                disableUnderline
+                className={[
+                  globalClasses.input,
+                  phoneError === false
+                    ? globalClasses.inputError
+                    : phoneError === true
+                      ? globalClasses.inputSuccess
+                      : '',
+                ]}
+              />
+              {/* </Box> */}
+            </Grid>
+          </Grid>
         </Box>
+
+        <Box className={globalClasses.flexRow}>
+          <Select
+            labelId="rider-zone"
+            id="input-zone"
+            name="input-zone"
+            defaultValue={riderZone}
+            displayEmpty
+            inputProps={{ 'aria-label': 'Without label' }}
+            value={riderZone}
+            onChange={e => setRiderZone(e.target.value)}
+            className={[
+              globalClasses.input,
+              zoneError === false
+                ? globalClasses.inputError
+                : zoneError === true
+                  ? globalClasses.inputSuccess
+                  : ''
+            ]}>
+            {!zone && (
+              <MenuItem sx={{ color: 'black' }} value={''}>
+                Rider Zone
+              </MenuItem>
+            )}
+            {data &&
+              data.zones.map(zone => (
+                <MenuItem
+                  style={{ color: 'black' }}
+                  value={zone._id}
+                  key={zone._id}>
+                  {zone.title}
+                </MenuItem>
+              ))}
+          </Select>
+        </Box>
+        <Box>
+          <Button
+            className={globalClasses.button}
+            disabled={loading}
+            onClick={async e => {
+              e.preventDefault()
+              if (onSubmitValidaiton()) {
+                mutate({
+                  variables: {
+                    riderInput: {
+                      _id: props.rider ? props.rider._id : '',
+                      name: formRef.current['input-name'].value,
+                      username: formRef.current['input-userName'].value,
+                      password: formRef.current['input-password'].value,
+                      phone: formRef.current['input-phone'].value,
+                      zone: riderZone,
+                      available: riderAvailable
+                    }
+                  }
+                })
+              }
+            }}>
+            SAVE
+          </Button>
+        </Box>
+      </form>
+      <Box mt={2}>
+        {success && (
+          <Alert
+            className={globalClasses.alertSuccess}
+            variant="filled"
+            severity="success">
+            {success}
+          </Alert>
+        )}
+        {mainError && (
+          <Alert
+            className={globalClasses.alertSuccess}
+            variant="filled"
+            severity="error">
+            {mainError}
+          </Alert>
+        )}
       </Box>
+      {/* </Box> */}
     </Box>
   )
 }

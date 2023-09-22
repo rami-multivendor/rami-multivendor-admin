@@ -48,8 +48,10 @@ function Stripe(props) {
 
       <Box className={classes.form}>
         <form ref={formRef}>
-          <Box className={globalClasses.flexRow}>
+          <Box>
+            <Typography className={classes.labelText}>Publish Key</Typography>
             <Input
+              style={{ marginTop: -1 }}
               id="input-publishablekey"
               name="input-publishablekey"
               placeholder="publish key e.g pk_test_lEaBbVGnTkzja2FyFiNlbqtw"
@@ -68,13 +70,15 @@ function Stripe(props) {
                 publishError === false
                   ? globalClasses.inputError
                   : publishError === true
-                  ? globalClasses.inputSuccess
-                  : ''
+                    ? globalClasses.inputSuccess
+                    : ''
               ]}
             />
           </Box>
-          <Box className={globalClasses.flexRow}>
+          <Box>
+            <Typography className={classes.labelText}>Secret Key</Typography>
             <Input
+              style={{ marginTop: -1 }}
               id="input-secretkey"
               placeholder="Secret e.g sk_test_rKNqVc2tSkdgZHNO3XnPCLn4"
               type="password"
@@ -92,8 +96,8 @@ function Stripe(props) {
                 secretError === false
                   ? globalClasses.inputError
                   : secretError === true
-                  ? globalClasses.inputSuccess
-                  : ''
+                    ? globalClasses.inputSuccess
+                    : ''
               ]}
             />
           </Box>

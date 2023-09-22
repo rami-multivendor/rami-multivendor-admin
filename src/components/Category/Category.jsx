@@ -61,8 +61,10 @@ function Category(props) {
       </Box>
       <Box className={classes.form}>
         <form>
-          <Box className={globalClasses.flexRow}>
+          <Box>
+            <Typography className={classes.labelText}>Name</Typography>
             <Input
+              style={{ marginTop: -1 }}
               id="input-category"
               name="input-category"
               placeholder="Category i.e Breakfast"

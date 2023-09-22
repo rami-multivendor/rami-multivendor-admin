@@ -57,6 +57,13 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main2,
     borderRadius: '50%',
     margin: '0 10px 0 0'
+  },
+  labelText: {
+    textAlign: 'left',
+    marginLeft: '4%',
+    fontSize: '15px',
+    fontWeight: '500',
+    marginTop: '10px'
   }
 }))
 
