@@ -6,7 +6,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row'
   },
   container: {
-    // backgroundColor: 'red',
     backgroundColor: theme.palette.background.primary,
     margin: '30px 0',
     borderRadius: 20,

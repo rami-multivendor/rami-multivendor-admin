@@ -123,8 +123,6 @@ function Email(props) {
                 />
               </Box>
             </Grid>
-
-            {/* Second Row */}
             <Grid item xs={12}>
               <Box>
                 <Typography className={classes.labelText}>Password</Typography>

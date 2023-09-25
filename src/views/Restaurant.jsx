@@ -19,7 +19,6 @@ const Restaurant = props => {
     setIsModalVisible(prevState => !prevState)
   }
   const loggedInUser = localStorage.getItem('user-enatega')
-  const { userType } = loggedInUser ? JSON.parse(loggedInUser) : {}
   const globalClasses = useGlobalStyles()
 
   const { data, error: errorQuery, loading: loadingQuery } = useQuery(
@@ -72,24 +71,22 @@ const Restaurant = props => {
             </Grid>
           )}
         </Box>
-        {userType === 'ADMIN' && (
-          <Box mt={6} className={globalClasses.flexRow}>
-            <Button
-              variant="contained"
-              onClick={() => {
-                setOwner(data.restaurantByOwner._id)
-                toggleModal()
-              }}
-              style={{
-                backgroundColor: '#000',
-                color: '#90EA93',
-                borderRadius: 10
-              }}
-              startIcon={<AddIcon fill="#000" />}>
-              Add New Restaurant
-            </Button>
-          </Box>
-        )}
+        <Box mt={6} className={globalClasses.flexRow}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setOwner(data.restaurantByOwner._id)
+              toggleModal()
+            }}
+            style={{
+              backgroundColor: '#000',
+              color: '#90EA93',
+              borderRadius: 10
+            }}
+            startIcon={<AddIcon fill="#000" />}>
+            Add New Restaurant
+          </Button>
+        </Box>
         <Modal
           open={isModalVisible}
           onClose={toggleModal}
