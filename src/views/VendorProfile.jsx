@@ -408,7 +408,7 @@ const VendorProfile = () => {
                     src={
                       imgUrl ||
                       (data && data.restaurant.image) ||
-                      'https://www.lifcobooks.com/wp-content/themes/shopchild/images/placeholder_book.png'
+                      'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg'
                     }
                   />
                   <label htmlFor="file-upload" className={classes.fileUpload}>
@@ -449,7 +449,7 @@ const VendorProfile = () => {
                               image:
                                 imgUpload ||
                                 data.restaurant.image ||
-                                'https://www.lifcobooks.com/wp-content/themes/shopchild/images/placeholder_book.png',
+                                'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg',
                               orderPrefix: prefix,
                               deliveryTime: Number(deliveryTime),
                               minimumOrder: Number(minimumOrder),

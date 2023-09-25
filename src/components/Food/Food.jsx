@@ -406,7 +406,7 @@ function Food(props) {
                 alt="..."
                 src={
                   imgMenu ||
-                  'https://www.lifcobooks.com/wp-content/themes/shopchild/images/placeholder_book.png'
+                  'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg'
                 }
               />
               <label htmlFor="file-upload" className={classes.fileUpload}>
