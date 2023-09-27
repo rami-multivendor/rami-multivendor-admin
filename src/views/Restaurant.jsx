@@ -18,7 +18,7 @@ const Restaurant = props => {
   const toggleModal = () => {
     setIsModalVisible(prevState => !prevState)
   }
-  const loggedInUser = localStorage.getItem('user-enatega')
+
   const globalClasses = useGlobalStyles()
 
   const { data, error: errorQuery, loading: loadingQuery } = useQuery(
