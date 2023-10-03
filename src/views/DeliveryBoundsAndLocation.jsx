@@ -57,7 +57,7 @@ export default function DeliveryBoundsAndLocation() {
       onError
     }
   )
-  const [mutate, { error, loading }] = useMutation(
+  const [mutate, { loading }] = useMutation(
     UPDATE_DELIVERY_BOUNDS_AND_LOCATION,
     {
       update: updateCache,
