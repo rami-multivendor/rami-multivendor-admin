@@ -10,7 +10,7 @@ import {
 import useGlobalStyles from '../utils/globalStyles'
 import useStyles from '../components/styles'
 import CustomLoader from '../components/Loader/CustomLoader'
-import { Container, Box, Button, Typography } from '@mui/material'
+import { Container, Box, Button, Typography, Alert } from '@mui/material'
 const UPDATE_DELIVERY_BOUNDS_AND_LOCATION = gql`
   ${updateDeliveryBoundsAndLocation}
 `
@@ -22,7 +22,10 @@ export default function DeliveryBoundsAndLocation() {
   const restaurantId = localStorage.getItem('restaurantId')
 
   const [drawBoundsOrMarker, setDrawBoundsOrMarker] = useState('marker') // polygon
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+
   const [center, setCenter] = useState({ lat: 33.684422, lng: 73.047882 })
   const [marker, setMarker] = useState({ lat: 33.684422, lng: 73.047882 })
   const [path, setPath] = useState([
@@ -54,7 +57,7 @@ export default function DeliveryBoundsAndLocation() {
       onError
     }
   )
-  const [mutate, { error, loading }] = useMutation(
+  const [mutate, { loading }] = useMutation(
     UPDATE_DELIVERY_BOUNDS_AND_LOCATION,
     {
       update: updateCache,
@@ -127,37 +130,51 @@ export default function DeliveryBoundsAndLocation() {
       }
     })
   }
+
   function onCompleted({ restaurant }) {
     if (restaurant) {
       setCenter({
         lat: +restaurant.location.coordinates[1],
-        lng: +restaurant.location.coordinates[0]
-      })
+        lng: +restaurant.location.coordinates[0],
+      });
       setMarker({
         lat: +restaurant.location.coordinates[1],
-        lng: +restaurant.location.coordinates[0]
-      })
+        lng: +restaurant.location.coordinates[0],
+      });
       setPath(
         restaurant.deliveryBounds
           ? transformPolygon(restaurant.deliveryBounds.coordinates[0])
           : path
-      )
-    }
+      );
+      }
   }
-  function onError({ networkError, graphqlErrors }) {}
+
+  function onError({ networkError, graphqlErrors }) {
+    setErrorMessage('An error occurred while updating location and bounds');
+    setTimeout(() => setErrorMessage(''), 5000); // Clear error message after 5 seconds
+  }
+
+
 
   const validate = () => {
     if (!marker) {
-      setErrorMessage('location marker is required')
-      return false
+      setErrorMessage('Location marker is required');
+      setTimeout(() => setErrorMessage(''), 5000); // Clear success message after 5 seconds
+      return false;
     }
     if (path.length < 3) {
-      setErrorMessage('delivery area is required')
-      return false
+      setErrorMessage('Delivery area is required');
+      setTimeout(() => setErrorMessage(''), 5000); // Clear success message after 5 seconds
+      return false;
     }
-    setErrorMessage(null)
-    return true
-  }
+    setSuccessMessage('Location and bounds updated successfully');
+    setTimeout(() => setSuccessMessage(''), 5000); // Clear success message after 5 seconds
+    setErrorMessage('');
+    return true;
+  };
+
+
+
   const onDragEnd = mapMouseEvent => {
     setMarker({
       lat: mapMouseEvent.latLng.lat(),
@@ -274,8 +291,26 @@ export default function DeliveryBoundsAndLocation() {
               Save
             </Button>
           </Box>
-          <p>{error ? error.message : ''}</p>
-          <p>{errorMessage !== null ? errorMessage : ''}</p>
+          {successMessage && (
+            <Alert
+              className={globalClasses.alertSuccess}
+              variant="filled"
+              severity="success"
+            >
+              {successMessage}
+            </Alert>
+          )}
+
+          {errorMessage && (
+            <Alert
+              className={globalClasses.alertError}
+              variant="filled"
+              severity="error"
+            >
+              {errorMessage}
+            </Alert>
+          )}
+
         </Box>
       </Container>
     </>

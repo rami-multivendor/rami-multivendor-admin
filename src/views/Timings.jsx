@@ -8,7 +8,7 @@ import { getRestaurantProfile, updateTimings } from '../apollo'
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker'
 import CustomLoader from '../components/Loader/CustomLoader'
 import useGlobalStyles from '../utils/globalStyles'
-import { Container, Grid, Box, Button } from '@mui/material'
+import { Container, Grid, Box, Button, Alert } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 const GET_RESTAURANT_PROFILE = gql`
@@ -20,6 +20,9 @@ const UPDATE_TIMINGS = gql`
 const Timings = props => {
   const [value, onChange] = useState({})
   const restaurantId = localStorage.getItem('restaurantId')
+
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { t } = props
   const onChangeTime = (day, values) => {
@@ -46,7 +49,7 @@ const Timings = props => {
   )
   const transformedTimes = {}
 
-  const [mutate, { error, loading }] = useMutation(UPDATE_TIMINGS)
+  const [mutate, { loading }] = useMutation(UPDATE_TIMINGS)
 
   data &&
     data.restaurant.openingTimes.forEach(value => {
@@ -110,21 +113,50 @@ const Timings = props => {
               value={transformedTimes.SUN || [['00:00', '23:59']]}
               onChangeTime={onChangeTime}
             />
-            <Button
-              onClick={e => {
-                e.preventDefault()
-                const openingTimes = getTransformedTimings()
-                mutate({
-                  variables: {
-                    id: restaurantId,
-                    openingTimes
-                  }
-                })
-              }}
-              className={[globalClasses.button, globalClasses.mb]}>
-              {loading ? 'Saving...' : 'Save'}
-            </Button>
-            {error && <span>{error.message}</span>}
+              <Button
+                onClick={e => {
+                  e.preventDefault();
+                  const openingTimes = getTransformedTimings();
+                  mutate({
+                    variables: {
+                      id: restaurantId,
+                      openingTimes
+                    },
+                    onCompleted: () => {
+                      setSuccessMessage('Time saved successfully');
+                      setTimeout(() => setSuccessMessage(''), 5000);
+                      setErrorMessage('');
+                    },
+                    onError: (error) => {
+                      setErrorMessage('Error while saving time');
+                      setTimeout(() => setErrorMessage(''), 5000);
+                      setSuccessMessage('');
+                    }
+                  });
+                }}
+                className={[globalClasses.button, globalClasses.mb]}
+              >
+                {loading ? 'Saving...' : 'Save'}
+              </Button>
+              {successMessage && (
+                <Alert
+                  className={globalClasses.alertSuccess}
+                  variant="filled"
+                  severity="success"
+                >
+                  {successMessage}
+                </Alert>
+              )}
+              {errorMessage && (
+                <Alert
+                  className={globalClasses.alertError}
+                  variant="filled"
+                  severity="error"
+                >
+                  {errorMessage}
+                </Alert>
+              )}
+
           </Box>
         )}
       </Container>

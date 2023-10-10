@@ -97,15 +97,12 @@ const Food = props => {
       name: 'Image',
       cell: row => (
         <>
-          {!!row.image && (
-            <img
-              className="img-responsive"
-              style={{ width: 30, height: 30, borderRadius: 15 }}
-              src={row.image}
-              alt="img menu"
-            />
-          )}
-          {!row.image && 'No Image'}
+          <img
+            className="img-responsive"
+            style={{ width: 30, height: 30, borderRadius: 15 }}
+            src={row.image || 'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg'}
+            alt={row.image ? 'img menu' : 'Default Image'}
+          />
         </>
       )
     },

@@ -57,7 +57,7 @@ function Food(props) {
   const onError = error => {
     mainErrorSetter(`Failed. Please try again. ${error}`)
     successSetter('')
-    setInterval(onDismiss, 400)
+    setTimeout(onDismiss, 5000)
   }
   const onCompleted = data => {
     if (!props.food) clearFields()
@@ -66,7 +66,9 @@ function Food(props) {
       : 'Food added successfully'
     mainErrorSetter('')
     successSetter(message)
-    setInterval(onDismiss, 400)
+    setTitle('');
+    setDescription('');
+    setTimeout(onDismiss, 5000)
   }
   const [mutate, { loading: mutateLoading }] = useMutation(mutation, {
     onError,
@@ -404,10 +406,7 @@ function Food(props) {
               <img
                 className={classes.image}
                 alt="..."
-                src={
-                  imgMenu ||
-                  'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg'
-                }
+                src={imgMenu || 'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg'}
               />
               <label htmlFor="file-upload" className={classes.fileUpload}>
                 Upload an image
