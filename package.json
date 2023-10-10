@@ -1,12 +1,15 @@
 {
   "name": "enatega-multivendor",
   "version": "2.0.0",
+  "engines": {
+    "node": ">=18.17.1"
+  },
   "description": "Enatega MultiVendor dashboard",
   "main": "index.js",
   "homepage": "https://multivendor-admin.ninjascode.com/",
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
