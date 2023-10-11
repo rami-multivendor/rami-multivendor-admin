@@ -1,147 +1,147 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { useMutation, gql } from '@apollo/client';
-import { validateFunc } from '../../constraints/constraints';
-import { withTranslation } from 'react-i18next';
+  import React, { useState, useRef, useCallback } from 'react';
+  import { useMutation, gql } from '@apollo/client';
+  import { validateFunc } from '../../constraints/constraints';
+  import { withTranslation } from 'react-i18next';
 
-import { GoogleMap, Polygon } from '@react-google-maps/api';
-import useStyles from './styles';
-import useGlobalStyles from '../../utils/globalStyles';
-import { Box, Typography, Input, Button, Alert, Grid } from '@mui/material';
+  import { GoogleMap, Polygon } from '@react-google-maps/api';
+  import useStyles from './styles';
+  import useGlobalStyles from '../../utils/globalStyles';
+  import { Box, Typography, Input, Button, Alert, Grid } from '@mui/material';
 
-// core components
-import { createZone, editZone, getZones } from '../../apollo';
-import { transformPath, transformPolygon } from '../../utils/coordinates';
+  // core components
+  import { createZone, editZone, getZones } from '../../apollo';
+  import { transformPath, transformPolygon } from '../../utils/coordinates';
 
-const CREATE_ZONE = gql`
+  const CREATE_ZONE = gql`
   ${createZone}
 `;
-const EDIT_ZONE = gql`
+  const EDIT_ZONE = gql`
   ${editZone}
 `;
-const GET_ZONE = gql`
+  const GET_ZONE = gql`
   ${getZones}
 `;
 
-const Zone = (props) => {
-  const [path, setPath] = useState(
-    props.zone ? transformPolygon(props.zone.location.coordinates[0]) : []
-  );
-  const [mutation] = useState(props.zone ? EDIT_ZONE : CREATE_ZONE);
-  const [title, setTitle] = useState(props.zone ? props.zone.title : '');
-  const [description, setDescription] = useState(
-    props.zone ? props.zone.description : ''
-  );
-  const listenersRef = useRef([]);
-  const [errors, setErrors] = useState('');
-  const [success, setSuccess] = useState('');
-  const [titleError, setTitleError] = useState(null);
-  const [descriptionError, setDescriptionError] = useState(null);
-
-  const onCompleted = (data) => {
-    if (!props.zone) clearFields();
-    const message = props.zone
-      ? 'Zone updated successfully'
-      : 'Zone added successfully';
-    setErrors('');
-    setSuccess(message);
-    setTimeout(hideAlert, 5000);
-  };
-
-  const onError = (error) => {
-    setErrors(error.message);
-    setSuccess('');
-    setTimeout(hideAlert, 5000);
-  };
-
-  const [mutate, { loading }] = useMutation(mutation, {
-    refetchQueries: [{ query: GET_ZONE }],
-    onError,
-    onCompleted,
-  });
-
-  const [center] = useState(
-    props.zone
-      ? setCenter(props.zone.location.coordinates[0])
-      : { lat: 33.684422, lng: 73.047882 }
-  );
-
-  const polygonRef = useRef();
-
-  const onClick = (e) => {
-    setPath([...path, { lat: e.latLng.lat(), lng: e.latLng.lng() }]);
-  };
-
-  // Call setPath with new edited path
-  const onEdit = useCallback(() => {
-    if (polygonRef.current) {
-      const nextPath = polygonRef.current
-        .getPath()
-        .getArray()
-        .map((latLng) => {
-          return { lat: latLng.lat(), lng: latLng.lng() };
-        });
-      setPath(nextPath);
-    }
-  }, [setPath]);
-
-  const onLoadPolygon = useCallback(
-    (polygon) => {
-      polygonRef.current = polygon;
-      const path = polygon.getPath();
-      listenersRef.current.push(
-        path.addListener('set_at', onEdit),
-        path.addListener('insert_at', onEdit),
-        path.addListener('remove_at', onEdit)
-      );
-    },
-    [onEdit]
-  );
-
-  const onUnmount = useCallback(() => {
-    listenersRef.current.forEach((lis) => lis.remove());
-    polygonRef.current = null;
-  }, []);
-
-  function setCenter(coordinates) {
-    return { lat: coordinates[0][1], lng: coordinates[0][0] };
-  }
-
-  const onSubmitValidation = () => {
-    setErrors('');
-    const titleErrors = !validateFunc({ title: title }, 'title');
-    const descriptionErrors = !validateFunc(
-      { description: description },
-      'description'
+  const Zone = (props) => {
+    const [path, setPath] = useState(
+      props.zone ? transformPolygon(props.zone.location.coordinates[0]) : []
     );
-    let zoneErrors = true;
-    if (path.length < 3) {
-      zoneErrors = false;
-      setErrors('Set Zone on Map');
-      return false;
+    const [mutation] = useState(props.zone ? EDIT_ZONE : CREATE_ZONE);
+    const [title, setTitle] = useState(props.zone ? props.zone.title : '');
+    const [description, setDescription] = useState(
+      props.zone ? props.zone.description : ''
+    );
+    const listenersRef = useRef([]);
+    const [errors, setErrors] = useState('');
+    const [success, setSuccess] = useState('');
+    const [titleError, setTitleError] = useState(null);
+    const [descriptionError, setDescriptionError] = useState(null);
+
+    const onCompleted = (data) => {
+      if (!props.zone) clearFields();
+      const message = props.zone
+        ? 'Zone updated successfully'
+        : 'Zone added successfully';
+      setErrors('');
+      setSuccess(message);
+      setTimeout(hideAlert, 5000);
+    };
+
+    const onError = (error) => {
+      setErrors(error.message);
+      setSuccess('');
+      setTimeout(hideAlert, 5000);
+    };
+
+    const [mutate, { loading }] = useMutation(mutation, {
+      refetchQueries: [{ query: GET_ZONE }],
+      onError,
+      onCompleted,
+    });
+
+    const [center] = useState(
+      props.zone
+        ? setCenter(props.zone.location.coordinates[0])
+        : { lat: 33.684422, lng: 73.047882 }
+    );
+
+    const polygonRef = useRef();
+
+    const onClick = (e) => {
+      setPath([...path, { lat: e.latLng.lat(), lng: e.latLng.lng() }]);
+    };
+
+    // Call setPath with new edited path
+    const onEdit = useCallback(() => {
+      if (polygonRef.current) {
+        const nextPath = polygonRef.current
+          .getPath()
+          .getArray()
+          .map((latLng) => {
+            return { lat: latLng.lat(), lng: latLng.lng() };
+          });
+        setPath(nextPath);
+      }
+    }, [setPath]);
+
+    const onLoadPolygon = useCallback(
+      (polygon) => {
+        polygonRef.current = polygon;
+        const path = polygon.getPath();
+        listenersRef.current.push(
+          path.addListener('set_at', onEdit),
+          path.addListener('insert_at', onEdit),
+          path.addListener('remove_at', onEdit)
+        );
+      },
+      [onEdit]
+    );
+
+    const onUnmount = useCallback(() => {
+      listenersRef.current.forEach((lis) => lis.remove());
+      polygonRef.current = null;
+    }, []);
+
+    function setCenter(coordinates) {
+      return { lat: coordinates[0][1], lng: coordinates[0][0] };
     }
 
-    setTitleError(titleErrors);
-    setDescriptionError(descriptionErrors);
-    return titleErrors && descriptionErrors && zoneErrors;
-  };
+    const onSubmitValidation = () => {
+      setErrors('');
+      const titleErrors = !validateFunc({ title: title }, 'title');
+      const descriptionErrors = !validateFunc(
+        { description: description },
+        'description'
+      );
+      let zoneErrors = true;
+      if (path.length < 3) {
+        zoneErrors = false;
+        setErrors('Set Zone on Map');
+        return false;
+      }
 
-  const clearFields = () => {
-    setTitle('');
-    setDescription('');
-    setTitleError(null);
-    setDescriptionError(null);
-    setPath([]);
-  };
+      setTitleError(titleErrors);
+      setDescriptionError(descriptionErrors);
+      return titleErrors && descriptionErrors && zoneErrors;
+    };
 
-  const hideAlert = () => {
-    setErrors('');
-    setSuccess('');
-  };
+    const clearFields = () => {
+      setTitle('');
+      setDescription('');
+      setTitleError(null);
+      setDescriptionError(null);
+      setPath([]);
+    };
 
-  const { t } = props;
+    const hideAlert = () => {
+      setErrors('');
+      setSuccess('');
+    };
 
-  const classes = useStyles();
-  const globalClasses = useGlobalStyles();
+    const { t } = props;
+
+    const classes = useStyles();
+    const globalClasses = useGlobalStyles();
 
   return (
     <Box container className={classes.container}>
