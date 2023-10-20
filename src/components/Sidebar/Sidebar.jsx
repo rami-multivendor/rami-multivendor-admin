@@ -42,7 +42,7 @@ function Sidebar(props) {
         <Typography
           variant="h2"
           className={[classes.headingText, classes.logoText]}>
-          RUMI
+          RAMI
         </Typography>
       </Toolbar>
       {restaurantName && restaurantImage ? (

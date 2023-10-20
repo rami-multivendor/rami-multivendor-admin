@@ -105,7 +105,7 @@ function Email(props) {
                   style={{ marginTop: -1 }}
                   id="input-emailName"
                   name="input-emailName"
-                  placeholder="e.g Rumi"
+                  placeholder="e.g Rami"
                   type="text"
                   defaultValue={emailName}
                   onBlur={event =>

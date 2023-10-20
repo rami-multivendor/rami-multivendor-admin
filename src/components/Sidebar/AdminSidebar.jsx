@@ -34,7 +34,7 @@ function AdminSidebar(props) {
         <Typography
           variant="h2"
           className={[classes.headingText, classes.logoText]}>
-          RUMI
+          RAMI
         </Typography>
       </Toolbar>
       <Box className={classes.sidebarList}>
