@@ -196,7 +196,7 @@ const DayComponent = ({ day, value, onChangeTime }) => {
             {index === values.length - 1 && (
               <AddIcon
                 style={{
-                  backgroundColor: '#DFCCFB',
+                  backgroundColor: '#94e469',
                   color: '#000',
                   borderRadius: '50%',
                   marginBottom: -5,
@@ -212,7 +212,7 @@ const DayComponent = ({ day, value, onChangeTime }) => {
               <RemoveIcon
                 style={{
                   backgroundColor: '#000',
-                  color: '#DFCCFB',
+                  color: '#94e469',
                   borderRadius: '50%',
                   marginLeft: 10,
                   marginRight: 10,

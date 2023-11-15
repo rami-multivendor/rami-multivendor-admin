@@ -11,7 +11,7 @@ export const customStyles = {
   },
   headRow: {
     style: {
-      backgroundColor: '#D0BFFF',
+      backgroundColor: '#94e469',
       color: '#FFFFFF',
       fontSize: '16px',
       fontWeight: 'bold',
@@ -70,11 +70,11 @@ export const customStyles = {
         fill: '#5A5858'
       },
       '&:hover:not(:disabled)': {
-        backgroundColor: '#DFCCFB'
+        backgroundColor: '#94e469'
       },
       '&:focus': {
         outline: 'none',
-        backgroundColor: '#DFCCFB'
+        backgroundColor: '#94e469'
       }
     }
   }

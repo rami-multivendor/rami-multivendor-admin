@@ -56,8 +56,8 @@ const dataLine = {
 const dataBar = {
   datasets: {
     label: 'Order count',
-    backgroundColor: '#DFCCFB',
-    borderColor: '#DFCCFB'
+    backgroundColor: '#94e469',
+    borderColor: '#94e469'
   }
 }
 
@@ -273,7 +273,7 @@ const Dashboard = props => {
               sx={{
                 fontSize: 35,
                 fontWeight: 'bold',
-                color: '#a594e0',
+                color: '#61d921',
                 textAlign: 'center'
               }}>
               {loadingTotal
@@ -302,7 +302,7 @@ const Dashboard = props => {
               sx={{
                 fontSize: 35,
                 fontWeight: 'bold',
-                color: '#a594e0',
+                color: '#61d921',
                 textAlign: 'center'
               }}>
               {loadingTotal

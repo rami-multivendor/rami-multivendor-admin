@@ -12,7 +12,7 @@ export default function SearchBar(props) {
       <IconButton onClick={props.onClick}>
         <RefreshIcon
           sx={{
-            color: '#D0BFFF'
+            color: '#94e469'
           }}
         />
       </IconButton>
@@ -33,7 +33,7 @@ export default function SearchBar(props) {
           <InputAdornment
             position="end"
             sx={{
-              color: '#D0BFFF'
+              color: '#94e469'
             }}>
             <SearchIcon />
           </InputAdornment>

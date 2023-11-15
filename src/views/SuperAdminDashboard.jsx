@@ -53,14 +53,14 @@ export const data = {
     {
       label: 'Restaurants',
       data: [1, 2, 3, 4, 5, 6, 7],
-      borderColor: '#DFCCFB',
-      backgroundColor: '#DFCCFB'
+      borderColor: '#94e469',
+      backgroundColor: '#94e469'
     },
     {
       label: 'Vendors',
       data: [8, 7, 6, 5, 4, 3, 2],
-      borderColor: '#a594e0',
-      backgroundColor: '#a594e0'
+      borderColor: '#61d921',
+      backgroundColor: '#61d921'
     },
     {
       label: 'Riders',
@@ -106,7 +106,7 @@ const SuperAdminDashboard = () => {
                   </Typography>
                   <ButtonBase
                     onClick={() =>
-                      (window.location.href = 'https://enatega.com')
+                      (window.location.href = 'https://yalla-multivendor-web.netlify.app/')
                     }
                     variant="contained"
                     sx={{ width: '30%' }}
@@ -228,7 +228,7 @@ const imgStyle = { marginLeft: '40%' }
 const sty = {
   fontSize: 35,
   fontWeight: 'bold',
-  color: '#a594e0',
+  color: '#61d921',
   textAlign: 'center'
 }
 const headSty = { fontSize: 15, fontWeight: 'bold' }

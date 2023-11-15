@@ -42,7 +42,7 @@ function Sidebar(props) {
         <Typography
           variant="h2"
           className={[classes.headingText, classes.logoText]}>
-          RAMI
+          Yalla
         </Typography>
       </Toolbar>
       {restaurantName && restaurantImage ? (
@@ -189,7 +189,7 @@ function Sidebar(props) {
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: drawerWidth,
-              background: `linear-gradient(180deg, #DFCCFB 50%, transparent 50%);`,
+              background: `linear-gradient(180deg, #94e469 50%, transparent 50%);`,
               borderRight: 'none'
             }
           }}

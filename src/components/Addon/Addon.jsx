@@ -243,7 +243,7 @@ function Addon(props) {
               <RemoveIcon
                 style={{
                   backgroundColor: '#000',
-                  color: '#DFCCFB',
+                  color: '#94e469',
                   borderRadius: '50%',
                   marginLeft: 12,
                   marginRight: 10
@@ -254,7 +254,7 @@ function Addon(props) {
               />
               <AddIcon
                 style={{
-                  backgroundColor: '#DFCCFB',
+                  backgroundColor: '#94e469',
                   color: '#000',
                   borderRadius: '50%'
                 }}

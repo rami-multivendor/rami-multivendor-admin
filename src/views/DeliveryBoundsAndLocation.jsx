@@ -238,13 +238,13 @@ export default function DeliveryBoundsAndLocation() {
               padding: '0 30px'
             }}>
             <Button
-              style={{ color: '#DFCCFB', backgroundColor: '#000' }}
+              style={{ color: '#94e469', backgroundColor: '#000' }}
               className={globalClasses.button}
               onClick={() => toggleDrawingMode('polygon')}>
               Draw Delivery Bounds
             </Button>
             <Button
-              style={{ color: '#DFCCFB', backgroundColor: '#000' }}
+              style={{ color: '#94e469', backgroundColor: '#000' }}
               className={globalClasses.button}
               onClick={() => toggleDrawingMode('marker')}>
               Set Restaurant Location

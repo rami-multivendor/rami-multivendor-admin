@@ -171,7 +171,7 @@ const Login = props => {
             <Box className={classes.flexRow}>
               <Box item className={classes.heading}>
                 <Typography variant="h6" className={classes.text}>
-                  Login to Rami
+                  Login to Yalla
                 </Typography>
               </Box>
             </Box>
@@ -201,8 +201,8 @@ const Login = props => {
                       stateData.emailError === false
                         ? globalClasses.inputError
                         : stateData.emailError === true
-                        ? globalClasses.inputSuccess
-                        : ''
+                          ? globalClasses.inputSuccess
+                          : ''
                     ]}
                   />
                 </Box>
@@ -231,8 +231,8 @@ const Login = props => {
                       stateData.passwordError === false
                         ? globalClasses.inputError
                         : stateData.passwordError === true
-                        ? globalClasses.inputSuccess
-                        : ''
+                          ? globalClasses.inputSuccess
+                          : ''
                     ]}
                   />
                 </Box>

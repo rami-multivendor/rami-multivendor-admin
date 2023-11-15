@@ -84,7 +84,7 @@ function AdminNavbar(props) {
                 mt={1}
                 sx={{ fontWeight: 'bold' }}
                 color="common.black">
-                Rami
+                Yalla
               </Typography>
             </Box>
             <Menu
