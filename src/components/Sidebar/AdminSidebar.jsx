@@ -12,7 +12,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 import routes from '../../routes'
 import useStyles from './styles'
-import { ReactComponent as Logo } from '../../assets/svg/logo.svg'
+import Logo from '../../assets/svg/logo.png'
 import { useLocation } from 'react-router-dom'
 
 const drawerWidth = 240
@@ -30,7 +30,8 @@ function AdminSidebar(props) {
     // <Box className={classes.sidebarContainer}>
     <Box className={classes.sidebarBox}>
       <Toolbar className={[classes.rowDisplay, classes.logo]}>
-        <Logo fontSize="small" />
+        {/* <Logo fontSize="small" /> */}
+        <img src={Logo} height={50} width={50} alt='Yalla' />
         <Typography
           variant="h2"
           className={[classes.headingText, classes.logoText]}>
