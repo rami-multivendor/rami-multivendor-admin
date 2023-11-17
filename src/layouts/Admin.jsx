@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 // core components
 import AdminNavbar from '../components/Navbars/AdminNavbar'
-import AdminFooter from '../components/Footers/AdminFooter'
+// import AdminFooter from '../components/Footers/AdminFooter'
 import Sidebar from '../components/Sidebar/Sidebar'
 import routes from '../routes'
 import { Box } from '@mui/material'
@@ -58,7 +58,7 @@ function Admin(props) {
           brandText={getBrandText(props.location.pathname)}
         />
         <Switch>{getRoutes(routes)}</Switch>
-        <AdminFooter />
+        {/* <AdminFooter /> */}
       </Box>
     </Box>
   )

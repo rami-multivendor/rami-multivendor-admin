@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import { Container } from '@mui/material'
 // core components
 import AdminNavbar from '../components/Navbars/AdminNavbar'
-import AdminFooter from '../components/Footers/AdminFooter'
+// import AdminFooter from '../components/Footers/AdminFooter'
 
 import routes from '../routes'
 
@@ -51,7 +51,7 @@ function Restaurant(props) {
         />
         <Switch>{getRoutes(routes)}</Switch>
         <Container fluid>
-          <AdminFooter />
+          {/* <AdminFooter /> */}
         </Container>
       </div>
     </>

@@ -369,7 +369,7 @@ const CreateRestaurant = props => {
               </Box>
             </Grid>
           </Grid>
-
+          
           <Box
             mt={3}
             style={{ alignItems: 'center' }}
@@ -379,7 +379,7 @@ const CreateRestaurant = props => {
               alt="..."
               src={
                 imgUrl ||
-                'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg'
+                'https://enatega.com/wp-content/uploads/2023/11/man-suit-having-breakfast-kitchen-side-view.webp'
               }
             />
             <label htmlFor="file-upload" className={classes.fileUpload}>
@@ -418,7 +418,7 @@ const CreateRestaurant = props => {
                         address,
                         image:
                           imgUpload ||
-                          'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg',
+                          'https://enatega.com/wp-content/uploads/2023/11/man-suit-having-breakfast-kitchen-side-view.webp',
                         deliveryTime: Number(deliveryTime),
                         minimumOrder: Number(minimumOrder),
                         username,

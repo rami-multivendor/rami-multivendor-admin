@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Route, Switch } from 'react-router-dom'
 // core components
 import AdminNavbar from '../components/Navbars/AdminNavbar'
-import AdminFooter from '../components/Footers/AdminFooter'
+// import AdminFooter from '../components/Footers/AdminFooter'
 import AdminSidebar from '../components/Sidebar/AdminSidebar'
 
 import routes from '../routes'
@@ -58,7 +58,7 @@ function SuperAdmin(props) {
           brandText={getBrandText(props.location.pathname)}
         />
         <Switch>{getRoutes(routes)}</Switch>
-        <AdminFooter />
+        {/* <AdminFooter /> */}
       </Box>
     </Box>
   )

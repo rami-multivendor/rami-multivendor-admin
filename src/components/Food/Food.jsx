@@ -406,7 +406,7 @@ function Food(props) {
               <img
                 className={classes.image}
                 alt="..."
-                src={imgMenu || 'https://enatega.com/wp-content/uploads/2023/09/default-img.jpg'}
+                src={imgMenu || 'https://enatega.com/wp-content/uploads/2023/11/man-suit-having-breakfast-kitchen-side-view.webp'}
               />
               <label htmlFor="file-upload" className={classes.fileUpload}>
                 Upload an image

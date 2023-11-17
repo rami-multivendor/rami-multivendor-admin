@@ -31,12 +31,12 @@ function AdminSidebar(props) {
     <Box className={classes.sidebarBox}>
       <Toolbar className={[classes.rowDisplay, classes.logo]}>
         {/* <Logo fontSize="small" /> */}
-        <img src={Logo} height={50} width={50} alt='Yalla' />
-        <Typography
+        <img src={Logo} height={50} width={90} alt='Yalla' />
+        {/* <Typography
           variant="h2"
           className={[classes.headingText, classes.logoText]}>
           Yalla
-        </Typography>
+        </Typography> */}
       </Toolbar>
       <Box className={classes.sidebarList}>
         {routes.map((prop, key) => {
